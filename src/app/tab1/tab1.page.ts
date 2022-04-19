@@ -19,7 +19,7 @@ export class Tab1Page implements ViewWillEnter, ViewWillLeave {
   constructor(private tabsService: TabsService) {}
 
   ionViewWillEnter(): void {
-    this.tab$ = this.tabsService.tabChangeEvent$.subscribe({
+    this.tab$ = this.tabsService.tabChange$.subscribe({
       next: (tab) => {
         if (tab === 'tab1') {
           this.content.scrollToTop().then();

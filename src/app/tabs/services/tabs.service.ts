@@ -6,12 +6,12 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TabsService {
-  tabChangeEvent = new Subject<string>();
-  tabChangeEvent$ = this.tabChangeEvent.asObservable();
+  tabChange = new Subject<string>();
+  tabChange$ = this.tabChange.asObservable();
 
   constructor() {}
 
   updateTab(tab: string): void {
-    this.tabChangeEvent.next(tab);
+    this.tabChange.next(tab);
   }
 }
