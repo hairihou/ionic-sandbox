@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { IonContent, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+import { IonContent, Platform, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 
 import { TabsService } from '../tabs/services/tabs.service';
 
@@ -14,15 +14,19 @@ import { TabsService } from '../tabs/services/tabs.service';
 export class Tab1Page implements ViewWillEnter, ViewWillLeave {
   @ViewChild(IonContent) content: IonContent;
 
+  title = 'Tab1';
+  isIos = false;
   tab$ = new Subscription();
 
-  constructor(private tabsService: TabsService) {}
+  constructor(private platform: Platform, private tabsService: TabsService) {
+    this.isIos = platform.is('ios');
+  }
 
   ionViewWillEnter(): void {
     this.tab$ = this.tabsService.tabChange$.subscribe({
       next: (tab) => {
         if (tab === 'tab1') {
-          this.content.scrollToTop().then();
+          this.content.scrollToTop(100).then();
         }
       },
     });
