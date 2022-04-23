@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { IonContent, Platform, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+import { IonContent, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 
 import { TabsService } from '../tabs/services/tabs.service';
 
@@ -15,12 +15,9 @@ export class Tab1Page implements ViewWillEnter, ViewWillLeave {
   @ViewChild(IonContent) content: IonContent;
 
   title = 'Tab1';
-  isIos = false;
   tab$ = new Subscription();
 
-  constructor(private platform: Platform, private tabsService: TabsService) {
-    this.isIos = platform.is('ios');
-  }
+  constructor(private tabsService: TabsService) {}
 
   ionViewWillEnter(): void {
     this.tab$ = this.tabsService.tabChange$.subscribe({

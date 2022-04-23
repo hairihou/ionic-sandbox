@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -8,9 +7,6 @@ import { Platform } from '@ionic/angular';
 })
 export class Tab3Page {
   title = 'Tab3';
-  isIos = false;
 
-  constructor(private platform: Platform) {
-    this.isIos = platform.is('ios');
-  }
+  constructor() {}
 }
