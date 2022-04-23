@@ -1,7 +1,8 @@
 describe('My First Test', () => {
   it('Visits the initial project page', () => {
-    cy.visit('/');
-    cy.contains('Welcome');
-    cy.contains('sandbox app is running!');
+    cy.visit('/tabs/tab1');
+    cy.contains('segment1');
+    cy.contains('segment2');
+    cy.contains('segment3');
   });
 });
