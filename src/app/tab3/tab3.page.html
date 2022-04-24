@@ -12,5 +12,18 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-list *ngIf="sampleData !== undefined">
+    <ion-item *ngFor="let data of sampleData">
+      <ion-label>{{ data.name }}</ion-label>
+      <ion-badge>{{ data.score }}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="sampleData === undefined">
+    <ion-item *ngFor="let skeleton of skeletonList">
+      <ion-label>
+        <ion-skeleton-text style="width: 88%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
