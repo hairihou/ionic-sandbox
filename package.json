@@ -30,7 +30,6 @@
     "@capacitor/keyboard": "1.2.2",
     "@capacitor/status-bar": "1.0.8",
     "@ionic/angular": "^6.1.2",
-    "npm-check-updates": "^12.5.9",
     "rxjs": "~7.5.5",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.5"
@@ -69,6 +68,7 @@
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "^1.7.0",
     "lint-staged": "^12.4.0",
+    "npm-check-updates": "^12.5.9",
     "prettier": "^2.6.2",
     "protractor": "~7.0.0",
     "ts-node": "~10.7.0",
