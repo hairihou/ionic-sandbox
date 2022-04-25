@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { delay, finalize, Observable, of, Subject, take, timer } from 'rxjs';
-
-import { ToastController } from '@ionic/angular';
+import { Observable, of, Subject } from 'rxjs';
 
 import { SampleData } from '../../interfaces/sample-data.interface';
 
@@ -13,7 +11,7 @@ export class TabsService {
   tabChange = new Subject<string>();
   tabChange$ = this.tabChange.asObservable();
 
-  constructor(private toastController: ToastController) {}
+  constructor() {}
 
   updateTab(tab: string): void {
     this.tabChange.next(tab);
@@ -25,23 +23,6 @@ export class TabsService {
       name: Math.random().toString(32).substring(2),
       score: (index + 1) * 1000,
     }));
-    const subscription = timer(3000)
-      .pipe(take(1))
-      .subscribe({
-        next: async () => {
-          const toast = await this.toastController.create({
-            color: 'dark',
-            duration: 2000,
-            message: '処理に時間がかかっています',
-          });
-          await toast.present();
-        },
-      });
-    return of(sampleData).pipe(
-      delay(10000),
-      finalize(() => {
-        subscription.unsubscribe();
-      })
-    );
+    return of(sampleData);
   }
 }
