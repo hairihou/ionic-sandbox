@@ -1,7 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TabsPage } from './tabs.page';
+import { TabsPageModule } from './tabs.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TabsPage', () => {
   let component: TabsPage;
@@ -9,8 +10,7 @@ describe('TabsPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TabsPage],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [TabsPageModule, RouterTestingModule],
     }).compileComponents();
   }));
 
