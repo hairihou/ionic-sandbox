@@ -1,50 +1,60 @@
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
+import { HttpTestingController } from '@angular/common/http/testing';
 
-import { ToastController, ToastOptions } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 import { PresentToastInterceptor } from './present-toast.interceptor';
-import { APP_BASE_HREF } from '@angular/common';
-import { HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-import { firstValueFrom } from 'rxjs';
-
-export class ToastControllerMock extends ToastController {
-  create: (opts?: ToastOptions) => Promise<HTMLIonToastElement>;
-  present: () => Promise<void>;
-}
+import { AppModule } from '../app.module';
+import { HttpService } from '../services/http.service';
+import { OverlayBaseController, TestModule } from '../test/test.module';
+import { of } from 'rxjs';
 
 describe('PresentToastInterceptor', () => {
   let interceptor: PresentToastInterceptor;
-  let handlerSpy: HttpHandler;
+  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
-  const toastControllerMock = new ToastControllerMock();
+  let toastControllerSpy: ToastController;
+  let httpServiceMock: HttpService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [AppModule, TestModule],
       providers: [
         PresentToastInterceptor,
-        { provide: APP_BASE_HREF, useValue: '/test/' },
         {
           provide: ToastController,
-          useValue: ToastControllerMock,
+          useClass: OverlayBaseController,
         },
       ],
     });
 
     interceptor = TestBed.inject(PresentToastInterceptor);
-    handlerSpy = jasmine.createSpyObj('HttpHandler', ['handle']);
-    httpTestingController = TestBed.get(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
+    httpTestingController = TestBed.inject(HttpTestingController);
+    toastControllerSpy = jasmine.createSpyObj('ToastController', ['create']);
+    httpServiceMock = TestBed.inject(HttpService);
   });
 
   it('should be created', () => {
     expect(interceptor).toBeTruthy();
   });
 
-  it('should replace appBaseHref', async () => {
-    const request = new HttpRequest('GET', '/test/data');
-    const result = await firstValueFrom(interceptor.intercept(request, handlerSpy));
-    expect(result).toEqual(jasmine.any(HttpResponse));
+  it('toast should not be presented', () => {
+    spyOn(httpServiceMock, 'getData').and.callFake(() => of([]));
+    httpServiceMock.getData().subscribe({
+      next: () => {
+        expect(toastControllerSpy.create).not.toHaveBeenCalled();
+      },
+    });
   });
+
+  it('toast should be presented', fakeAsync(() => {
+    spyOn(httpServiceMock, 'getData').and.callFake(() => of([]));
+    httpServiceMock.getData().subscribe({
+      next: () => {
+        expect(toastControllerSpy.create).not.toHaveBeenCalled();
+      },
+    });
+  }));
 });

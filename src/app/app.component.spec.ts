@@ -2,11 +2,12 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
+import { TestModule } from './test/test.module';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, TestModule],
     }).compileComponents();
   }));
 
