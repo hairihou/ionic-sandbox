@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, NgModule } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 // import {
 //   HttpClientModule,
@@ -15,32 +14,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Observable, of } from 'rxjs';
-
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { IonRouterOutlet, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import { IonRouterOutlet, LoadingController, ModalController, ToastController } from '@ionic/angular';
 
-@Injectable()
-export class InterceptorService implements HttpInterceptor {
-  public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return of(new HttpResponse({ status: 200, body: {} }));
-  }
-}
-
-@Injectable({
-  providedIn: 'root',
-})
-export class PlatformMock {
-  ready: unknown;
-  backButton: {
-    subscribeWithPriority: unknown;
-  };
-
-  is(platformName: any): boolean {
-    return undefined;
-  }
-}
+// @Injectable()
+// export class InterceptorService implements HttpInterceptor {
+//   public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+//     return of(new HttpResponse({ status: 200, body: {} }));
+//   }
 
 @Injectable({
   providedIn: 'root',
@@ -71,10 +53,6 @@ export class OverlayBaseController {
       useValue: {
         nativeEl: '',
       },
-    },
-    {
-      provide: Platform,
-      useClass: PlatformMock,
     },
     {
       provide: LoadingController,

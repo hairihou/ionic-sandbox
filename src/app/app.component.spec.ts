@@ -25,14 +25,14 @@ describe('AppComponent', () => {
   });
 
   it('isIos return true', () => {
-    spyOn(platformMock, 'is').and.callFake(() => true);
+    spyOn(platformMock, 'is').and.callFake((platformName: any) => true);
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
     expect(component.isIos()).toBeTrue();
   });
 
   it('isIos return false', () => {
-    spyOn(platformMock, 'is').and.callFake(() => false);
+    spyOn(platformMock, 'is').and.callFake((platformName: any) => false);
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
     expect(component.isIos()).toBeFalse();
