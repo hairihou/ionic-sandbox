@@ -2,13 +2,14 @@ import { fakeAsync, TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpTestingController } from '@angular/common/http/testing';
 
+import { of } from 'rxjs';
+
 import { ToastController } from '@ionic/angular';
 
 import { PresentToastInterceptor } from './present-toast.interceptor';
 import { AppModule } from '../app.module';
 import { HttpService } from '../services/http.service';
 import { OverlayBaseController, TestModule } from '../test/test.module';
-import { of } from 'rxjs';
 
 describe('PresentToastInterceptor', () => {
   let interceptor: PresentToastInterceptor;
