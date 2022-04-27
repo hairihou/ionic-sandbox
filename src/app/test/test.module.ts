@@ -19,12 +19,26 @@ import { Observable, of } from 'rxjs';
 
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { IonRouterOutlet, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { IonRouterOutlet, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return of(new HttpResponse({ status: 200, body: {} }));
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PlatformMock {
+  ready: unknown;
+  backButton: {
+    subscribeWithPriority: unknown;
+  };
+
+  is(platformName: any): boolean {
+    return undefined;
   }
 }
 
@@ -57,6 +71,10 @@ export class OverlayBaseController {
       useValue: {
         nativeEl: '',
       },
+    },
+    {
+      provide: Platform,
+      useClass: PlatformMock,
     },
     {
       provide: LoadingController,

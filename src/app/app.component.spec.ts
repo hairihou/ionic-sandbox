@@ -6,34 +6,16 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 import { TestModule } from './test/test.module';
 
-class BackButtonMock {
-  subscribeWithPriority: jasmine.Spy<any>;
-}
-
-class PlatformMock {
-  ready: jasmine.Spy<any>;
-  backButton: any;
-
-  is(platformName: any): boolean {
-    return true;
-  }
-}
-
 describe('AppComponent', () => {
   let platformMock: Platform;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [AppModule, TestModule],
-      providers: [
-        {
-          provide: Platform,
-          useClass: PlatformMock,
-        },
-      ],
     }).compileComponents();
 
     platformMock = TestBed.inject(Platform);
+    platformMock.backButton = jasmine.createSpyObj('Platform', ['subscribeWithPriority']);
   }));
 
   it('should create the app', () => {
@@ -46,6 +28,13 @@ describe('AppComponent', () => {
     spyOn(platformMock, 'is').and.callFake(() => true);
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
-    expect(component.isIos()).toBeTruthy();
+    expect(component.isIos()).toBeTrue();
+  });
+
+  it('isIos return false', () => {
+    spyOn(platformMock, 'is').and.callFake(() => false);
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
+    expect(component.isIos()).toBeFalse();
   });
 });
