@@ -6,24 +6,37 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher [disabled]="sampleData === undefined" slot="fixed" (ionRefresh)="loadData(sampleData, $any($event))">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngIf="sampleData !== undefined">
-    <ion-item *ngFor="let data of sampleData">
-      <ion-label>{{ data.name }}</ion-label>
-      <ion-badge>{{ data.score }}</ion-badge>
-    </ion-item>
-  </ion-list>
+  <ng-container>
+    <cdk-virtual-scroll-viewport itemSize="47" minBufferPx="900" maxBufferPx="1350">
+      <ion-list *ngIf="sampleData !== undefined; else skeleton">
+        <ion-item *cdkVirtualFor="let data of sampleData; index as i">
+          <ion-avatar slot="start">
+            <img [src]="'https://i.pravatar.cc/150?img=' + data.imageId" alt="avatar image" />
+          </ion-avatar>
+          <ion-label>{{ data.name }}</ion-label>
+          <ion-badge>{{ data.score }}</ion-badge>
+        </ion-item>
+      </ion-list>
 
-  <ion-list *ngIf="sampleData === undefined">
-    <ion-item *ngFor="let skeleton of skeletonList">
-      <ion-label>
-        <ion-skeleton-text style="width: 88%"></ion-skeleton-text>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+      <ng-template #skeleton>
+        <ion-list *ngIf="sampleData === undefined">
+          <ion-item *cdkVirtualFor="let skeleton of skeletonList">
+            <ion-label>
+              <ion-skeleton-text style="width: 88%"></ion-skeleton-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
 </ion-content>
