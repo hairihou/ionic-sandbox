@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { finalize } from 'rxjs';
+
+import { InfiniteScrollCustomEvent, RefresherCustomEvent } from '@ionic/angular';
+
 import { TabsService } from '../tabs/services/tabs.service';
 import { SampleData } from '../interfaces/sample-data.interface';
-import { InfiniteScrollCustomEvent, RefresherCustomEvent } from '@ionic/angular';
-import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-tab3',
