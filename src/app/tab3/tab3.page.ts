@@ -4,7 +4,7 @@ import { finalize } from 'rxjs';
 
 import { InfiniteScrollCustomEvent, RefresherCustomEvent } from '@ionic/angular';
 
-import { SampleData } from '../interfaces/sample-data.interface';
+import { SampleListItem } from '../interfaces/sample-data.interface';
 import { TabsService } from '../tabs/services/tabs.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class Tab3Page implements OnInit {
   title = 'Tab3';
   refresherDisabled = true;
   infiniteScrollDisabled = true;
-  sampleData: SampleData[];
-  skeletonList = [...Array(20)];
+  sampleList: SampleListItem[];
+  skeletonList = [...Array(10)];
 
   constructor(private tabsService: TabsService) {}
 
@@ -25,9 +25,9 @@ export class Tab3Page implements OnInit {
     this.loadData([]);
   }
 
-  loadData(items: SampleData[], event: RefresherCustomEvent | InfiniteScrollCustomEvent = undefined): void {
+  loadData(items: SampleListItem[], event: RefresherCustomEvent | InfiniteScrollCustomEvent = undefined): void {
     this.tabsService
-      .getSampleData(items.length)
+      .getSampleList(items.length)
       .pipe(
         finalize(() => {
           event?.target.complete().then();
@@ -36,12 +36,14 @@ export class Tab3Page implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          this.sampleData = items.concat(response);
-          this.infiniteScrollDisabled = response.length < 0;
+          this.sampleList = items.concat(response);
+          this.infiniteScrollDisabled = response.length === 0;
         },
         error: () => {
-          this.sampleData = [];
-          this.infiniteScrollDisabled = true;
+          if (items.length === 0) {
+            this.sampleList = [];
+            this.infiniteScrollDisabled = true;
+          }
         },
       });
   }

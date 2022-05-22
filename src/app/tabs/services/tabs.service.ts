@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { concatMap, Observable, of, Subject, timer } from 'rxjs';
 
-import { SampleData } from '../../interfaces/sample-data.interface';
+import { SampleListItem } from '../../interfaces/sample-data.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,17 +20,17 @@ export class TabsService {
     this.tabChange.next(tab);
   }
 
-  getSampleData(offset: number): Observable<SampleData[]> {
+  getSampleList(offset: number): Observable<SampleListItem[]> {
     return offset >= 100000
       ? of([])
       : timer(3000).pipe(
           concatMap(() =>
             of(
-              [...Array(50)].map((_, index) => ({
+              [...Array(100)].map((_, index) => ({
                 id: index + offset + 1,
                 imageId: (index + offset + 1) % 70,
                 name: Math.random().toString(32).substring(2),
-                score: (index + offset + 1) * 1000,
+                score: (index + offset + 1) * 10,
               }))
             )
           )

@@ -1,12 +1,12 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" appLargeTitleHeader>
   <ion-toolbar>
     <ion-menu-button slot="start"></ion-menu-button>
     <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-header collapse="condense">
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" appLargeTitleHeader>
     <ion-toolbar>
       <ion-title size="large">{{ title }}</ion-title>
     </ion-toolbar>

@@ -1,4 +1,4 @@
-export interface SampleData {
+export interface SampleListItem {
   id: number;
   imageId: number;
   name: string;

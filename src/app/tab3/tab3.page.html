@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" appLargeTitleHeader>
   <ion-toolbar>
     <ion-menu-button slot="start"></ion-menu-button>
     <ion-title>{{ title }}</ion-title>
@@ -6,19 +6,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" [scrollY]="false">
-  <ion-refresher [disabled]="refresherDisabled" slot="fixed" (ionRefresh)="loadData([], $any($event))">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
   <cdk-virtual-scroll-viewport class="ion-content-scroll-host" itemSize="48" minBufferPx="900" maxBufferPx="1350">
-    <ion-header collapse="condense">
+    <ion-refresher [disabled]="refresherDisabled" slot="fixed" (ionRefresh)="loadData([], $any($event))">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-header collapse="condense" appLargeTitleHeader>
       <ion-toolbar>
         <ion-title size="large">{{ title }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-list *ngIf="sampleData !== undefined; else skeleton">
-      <ion-item *cdkVirtualFor="let data of sampleData; index as i">
+    <ion-list *ngIf="sampleList !== undefined; else skeleton">
+      <ion-item *cdkVirtualFor="let data of sampleList; index as i">
         <ion-avatar slot="start">
           <img [src]="'https://i.pravatar.cc/150?img=' + data.imageId" alt="avatar image" />
         </ion-avatar>
@@ -27,7 +27,7 @@
       </ion-item>
     </ion-list>
     <ng-template #skeleton>
-      <ion-list *ngIf="sampleData === undefined">
+      <ion-list *ngIf="sampleList === undefined">
         <ion-item *cdkVirtualFor="let skeleton of skeletonList">
           <ion-label>
             <ion-skeleton-text></ion-skeleton-text>
@@ -36,7 +36,7 @@
       </ion-list>
     </ng-template>
 
-    <ion-infinite-scroll [disabled]="infiniteScrollDisabled" (ionInfinite)="loadData(sampleData, $any($event))">
+    <ion-infinite-scroll [disabled]="infiniteScrollDisabled" (ionInfinite)="loadData(sampleList, $any($event))">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </cdk-virtual-scroll-viewport>
