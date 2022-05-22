@@ -1,0 +1,8 @@
+'*.ts':
+  - prettier --parser typescript --write
+'*.html':
+  - prettier --parser angular --write
+'*.scss':
+  - prettier --parser scss --write
+'*.{json,md,js}':
+  - prettier --write
