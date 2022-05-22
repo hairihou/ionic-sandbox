@@ -4,8 +4,8 @@ import { finalize } from 'rxjs';
 
 import { InfiniteScrollCustomEvent, RefresherCustomEvent } from '@ionic/angular';
 
-import { TabsService } from '../tabs/services/tabs.service';
 import { SampleData } from '../interfaces/sample-data.interface';
+import { TabsService } from '../tabs/services/tabs.service';
 
 @Component({
   selector: 'app-tab3',
@@ -14,6 +14,8 @@ import { SampleData } from '../interfaces/sample-data.interface';
 })
 export class Tab3Page implements OnInit {
   title = 'Tab3';
+  refresherDisabled = true;
+  infiniteScrollDisabled = true;
   sampleData: SampleData[];
   skeletonList = [...Array(20)];
 
@@ -25,18 +27,21 @@ export class Tab3Page implements OnInit {
 
   loadData(items: SampleData[], event: RefresherCustomEvent | InfiniteScrollCustomEvent = undefined): void {
     this.tabsService
-      .getSampleData()
+      .getSampleData(items.length)
       .pipe(
         finalize(() => {
           event?.target.complete().then();
+          this.refresherDisabled = false;
         })
       )
       .subscribe({
         next: (response) => {
           this.sampleData = items.concat(response);
+          this.infiniteScrollDisabled = response.length < 0;
         },
         error: () => {
           this.sampleData = [];
+          this.infiniteScrollDisabled = true;
         },
       });
   }

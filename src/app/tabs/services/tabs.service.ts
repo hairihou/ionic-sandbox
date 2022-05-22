@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { concatMap, Observable, of, Subject, timer } from 'rxjs';
 
@@ -11,7 +12,7 @@ export class TabsService {
   tabChange$: Observable<string>;
   private tabChange = new Subject<string>();
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.tabChange$ = this.tabChange.asObservable();
   }
 
@@ -19,23 +20,27 @@ export class TabsService {
     this.tabChange.next(tab);
   }
 
-  getSampleData(): Observable<SampleData[]> {
-    const sampleData: SampleData[] = [...Array(200)].map((_, index) => ({
-      id: index + 1,
-      imageId: (index + 1) % 70,
-      name: Math.random().toString(32).substring(2),
-      score: (index + 1) * 1000,
-    }));
-    return timer(3000).pipe(concatMap(() => of(sampleData)));
+  getSampleData(offset: number): Observable<SampleData[]> {
+    return offset >= 100000
+      ? of([])
+      : timer(3000).pipe(
+          concatMap(() =>
+            of(
+              [...Array(50)].map((_, index) => ({
+                id: index + offset + 1,
+                imageId: (index + offset + 1) % 70,
+                name: Math.random().toString(32).substring(2),
+                score: (index + offset + 1) * 1000,
+              }))
+            )
+          )
+        );
   }
 
-  getSampleImage(): Observable<SampleData[]> {
-    const sampleData: SampleData[] = [...Array(200)].map((_, index) => ({
-      id: index + 1,
-      imageId: (index + 1) % 70,
-      name: Math.random().toString(32).substring(2),
-      score: (index + 1) * 1000,
-    }));
-    return of(sampleData);
+  getSampleImage(imageId: number): Observable<Blob> {
+    const url = `https://i.pravatar.cc/150?img=${imageId}`;
+    return this.httpClient.get(url, {
+      responseType: 'blob',
+    });
   }
 }

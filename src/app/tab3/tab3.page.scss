@@ -1,3 +1,7 @@
 ion-item {
-  height: 47px;
+  height: 48px;
+
+  & > ion-label > ion-skeleton-text {
+    width: 248px;
+  }
 }
