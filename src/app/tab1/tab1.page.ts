@@ -14,7 +14,7 @@ import { TabsService } from '../tabs/services/tabs.service';
 export class Tab1Page implements ViewWillEnter, ViewWillLeave {
   @ViewChild(IonContent) content: IonContent;
 
-  title = 'Tab1';
+  readonly title = 'Tab1';
   tab$ = new Subscription();
 
   constructor(private tabsService: TabsService) {}

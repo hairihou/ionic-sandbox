@@ -6,11 +6,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" [scrollY]="false">
-  <cdk-virtual-scroll-viewport class="ion-content-scroll-host" itemSize="48" minBufferPx="900" maxBufferPx="1350">
-    <ion-refresher [disabled]="refresherDisabled" slot="fixed" (ionRefresh)="loadData([], $any($event))">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+  <ion-refresher [disabled]="refresherDisabled" slot="fixed" (ionRefresh)="loadData([], $any($event))">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
+  <cdk-virtual-scroll-viewport class="ion-content-scroll-host" itemSize="48" minBufferPx="900" maxBufferPx="1350">
     <ion-header collapse="condense" appLargeTitleHeader>
       <ion-toolbar>
         <ion-title size="large">{{ title }}</ion-title>

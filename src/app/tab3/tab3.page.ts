@@ -13,7 +13,7 @@ import { TabsService } from '../tabs/services/tabs.service';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page implements OnInit {
-  title = 'Tab3';
+  readonly title = 'Tab3';
   refresherDisabled = true;
   infiniteScrollDisabled = true;
   sampleList: SampleListItem[];
