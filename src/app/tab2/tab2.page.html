@@ -19,7 +19,7 @@
   <ion-list *ngIf="sampleWiki !== undefined; else loading">
     <ion-item *ngFor="let wiki of sampleWiki; index as i">
       <ion-label position="stacked">{{ wiki.title }}</ion-label>
-      <ion-text [class.selectable]="i % 2 === 0">{{ wiki.text }}</ion-text>
+      <ion-text class="text-pre-wrap" [class.selectable]="i % 2 === 0">{{ wiki.text }}</ion-text>
     </ion-item>
   </ion-list>
   <ng-template #loading>
