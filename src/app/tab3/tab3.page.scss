@@ -2,10 +2,6 @@ ion-refresher.refresher-active {
   z-index: 1;
 }
 
-ion-item {
-  height: 48px;
-
-  & > ion-label > ion-skeleton-text {
-    width: 200px;
-  }
+ion-item > ion-label > ion-skeleton-text {
+  width: 200px;
 }

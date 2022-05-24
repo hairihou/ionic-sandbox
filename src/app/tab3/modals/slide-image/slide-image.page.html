@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onDismiss()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>slide-image</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>OK</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <div class="slide-images-wrapper">
+      <swiper [config]="swiperOptions">
+        <ng-template swiperSlide>
+          <div class="slide-image-wrapper">
+            <ion-button class="slide-inner-button" shape="round" size="small">
+              <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <div class="swiper-zoom-container">
+              <img src="assets/images/1253x756.jpeg" alt="image" />
+            </div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="slide-image-wrapper">
+            <ion-button class="slide-inner-button" shape="round" size="small">
+              <ion-icon name="image-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <div class="swiper-zoom-container">
+              <img src="assets/images/756x1253.jpeg" alt="image" />
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </ion-toolbar>
+</ion-content>

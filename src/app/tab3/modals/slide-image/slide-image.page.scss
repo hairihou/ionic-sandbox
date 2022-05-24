@@ -1,0 +1,16 @@
+ion-button.slide-inner-button {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+}
+
+.slide-image-wrapper {
+  border: 1px solid var(--ion-color-warning);
+  margin: 8px;
+  max-height: 160px;
+  min-height: 160px;
+  max-width: 240px;
+  min-width: 240px;
+  overflow: scroll;
+}

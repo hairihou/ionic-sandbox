@@ -23,7 +23,7 @@ export class TabsService {
   getSampleList(offset: number): Observable<SampleListItem[]> {
     return offset >= 100000
       ? of([])
-      : timer(3000).pipe(
+      : timer(1000).pipe(
           concatMap(() =>
             of(
               [...Array(100)].map((_, index) => ({
