@@ -23,7 +23,7 @@
     </ion-header>
 
     <ion-list *ngIf="sampleList !== undefined; else skeleton">
-      <ion-item [button]="true" (click)="presentModal()" *cdkVirtualFor="let data of sampleList; index as i">
+      <ion-item *cdkVirtualFor="let data of sampleList; index as i">
         <ion-avatar slot="start">
           <img [src]="'https://i.pravatar.cc/150?img=' + data.imageId" alt="avatar image" />
         </ion-avatar>
