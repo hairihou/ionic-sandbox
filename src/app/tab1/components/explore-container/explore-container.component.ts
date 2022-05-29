@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-explore-container',
