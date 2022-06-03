@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,9 +13,5 @@ export class AppComponent {
   ];
   labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-  constructor(private platform: Platform) {}
-
-  isIos(): boolean {
-    return this.platform.is('ios');
-  }
+  constructor() {}
 }
