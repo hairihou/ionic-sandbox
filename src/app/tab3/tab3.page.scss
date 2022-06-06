@@ -6,8 +6,8 @@ ion-list.list {
   margin: 16px;
   border-radius: 6px;
   border: 1px solid var(--ion-color-primary);
-}
 
-ion-item > ion-label > ion-skeleton-text {
-  width: 200px;
+  & > ion-item.list-item {
+    height: 56px;
+  }
 }

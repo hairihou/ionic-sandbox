@@ -10,25 +10,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [scrollY]="false">
+<ion-content [fullscreen]="true" [scrollX]="true" [scrollY]="false">
   <!--  <ion-refresher [disabled]="refresherDisabled" slot="fixed" (ionRefresh)="loadData([], $any($event))">-->
   <!--    <ion-refresher-content></ion-refresher-content>-->
   <!--  </ion-refresher>-->
 
-  <cdk-virtual-scroll-viewport
-    class="ion-content-scroll-host"
-    [itemSize]="heightFn()"
-    maxBufferPx="1400"
-    minBufferPx="1000"
-  >
+  <cdk-virtual-scroll-viewport class="ion-content-scroll-host" itemSize="56" maxBufferPx="1400" minBufferPx="1000">
     <ion-header collapse="condense" appLargeTitleHeader>
       <ion-toolbar>
         <ion-title size="large">{{ title }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-list class="list" *ngIf="sampleList !== undefined; else skeleton">
-      <ion-item *cdkVirtualFor="let data of sampleList; index as i" (click)="scrollFn($event)">
+    <ion-list class="list" *ngIf="sampleList !== undefined; else loading">
+      <ion-item class="list-item" *cdkVirtualFor="let data of sampleList; index as i" (click)="scrollFn($event)">
         <ion-avatar slot="start">
           <img [src]="'https://i.pravatar.cc/150?img=' + data.imageId" alt="avatar image" />
         </ion-avatar>
@@ -36,14 +31,10 @@
         <ion-badge>{{ data.score }}</ion-badge>
       </ion-item>
     </ion-list>
-    <ng-template #skeleton>
-      <ion-list class="list" *ngIf="sampleList === undefined">
-        <ion-item *cdkVirtualFor="let skeleton of skeletonList">
-          <ion-label>
-            <ion-skeleton-text></ion-skeleton-text>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+    <ng-template #loading>
+      <div class="ion-text-center">
+        <ion-spinner></ion-spinner>
+      </div>
     </ng-template>
 
     <ion-infinite-scroll [disabled]="infiniteScrollDisabled" (ionInfinite)="loadData(sampleList, $any($event))">

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 import { finalize } from 'rxjs';
 
@@ -7,7 +8,6 @@ import { InfiniteScrollCustomEvent, ModalController, Platform, RefresherCustomEv
 import { SampleListItem } from '../interfaces/sample-data.interface';
 import { TabsService } from '../tabs/services/tabs.service';
 import { VirtualContentPage } from './modals/virtual-content/virtual-content.page';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-tab3',
@@ -20,16 +20,12 @@ export class Tab3Page implements OnInit {
   refresherDisabled = true;
   infiniteScrollDisabled = true;
   sampleList: SampleListItem[];
-  skeletonList = [...Array(10)];
+  skeletonList = [...Array(50)];
 
   constructor(private modalController: ModalController, private platform: Platform, private tabsService: TabsService) {}
 
   ngOnInit(): void {
     this.loadData([]);
-  }
-
-  heightFn(): number {
-    return this.platform.is('ios') ? 46 : 56;
   }
 
   async presentModal(): Promise<void> {
@@ -41,7 +37,6 @@ export class Tab3Page implements OnInit {
 
   scrollFn(event: MouseEvent): void {
     const { clientX, clientY } = event;
-    console.log(clientX, clientY);
     this.virtualScrollViewport.scrollTo({ top: clientY - 96, left: clientX });
   }
 
