@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { finalize } from 'rxjs';
 
 import { InfiniteScrollCustomEvent, ModalController, Platform, RefresherCustomEvent } from '@ionic/angular';
 
 import { SampleListItem } from '../interfaces/sample-data.interface';
-import { SlideImagePage } from './modals/slide-image/slide-image.page';
 import { TabsService } from '../tabs/services/tabs.service';
+import { VirtualContentPage } from './modals/virtual-content/virtual-content.page';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-tab3',
@@ -14,6 +15,7 @@ import { TabsService } from '../tabs/services/tabs.service';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page implements OnInit {
+  @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport: CdkVirtualScrollViewport;
   readonly title = 'Tab3';
   refresherDisabled = true;
   infiniteScrollDisabled = true;
@@ -32,9 +34,15 @@ export class Tab3Page implements OnInit {
 
   async presentModal(): Promise<void> {
     const modal = await this.modalController.create({
-      component: SlideImagePage,
+      component: VirtualContentPage,
     });
     return modal.present();
+  }
+
+  scrollFn(event: MouseEvent): void {
+    const { clientX, clientY } = event;
+    console.log(clientX, clientY);
+    this.virtualScrollViewport.scrollTo({ top: clientY - 96, left: clientX });
   }
 
   loadData(items: SampleListItem[], event: RefresherCustomEvent | InfiniteScrollCustomEvent = undefined): void {

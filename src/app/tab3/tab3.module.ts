@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+
 import { SwiperModule } from 'swiper/angular';
 
 import { Tab3Page } from './tab3.page';
@@ -11,6 +12,7 @@ import { Tab3Page } from './tab3.page';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 
 import { SlideImagePage } from './modals/slide-image/slide-image.page';
+import { VirtualContentPage } from './modals/virtual-content/virtual-content.page';
 import { CoreModule } from '../core/core.module';
 
 @NgModule({
@@ -24,6 +26,6 @@ import { CoreModule } from '../core/core.module';
     Tab3PageRoutingModule,
     CoreModule,
   ],
-  declarations: [Tab3Page, SlideImagePage],
+  declarations: [Tab3Page, SlideImagePage, VirtualContentPage],
 })
 export class Tab3PageModule {}
