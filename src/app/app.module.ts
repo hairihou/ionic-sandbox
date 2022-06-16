@@ -13,7 +13,6 @@ import { PresentToastInterceptor } from './interceptors/present-toast.intercepto
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [BrowserModule, HttpClientModule, StoreModule.forRoot({}, {}), IonicModule.forRoot(), AppRoutingModule],
   providers: [
     {
