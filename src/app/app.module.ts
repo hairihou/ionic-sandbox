@@ -9,7 +9,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PresentToastInterceptor } from './interceptors/present-toast.interceptor';
+import { PresentToastInterceptor } from './core/interceptors/present-toast.interceptor';
 
 @NgModule({
   declarations: [AppComponent],

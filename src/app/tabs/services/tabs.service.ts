@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { concatMap, Observable, of, Subject, timer } from 'rxjs';
 
-import { SampleListItem, SampleWiki } from '../../interfaces/sample-data.interface';
+import { SampleListItem, SampleWiki } from '../../core/interfaces/sample-data.interface';
 
 @Injectable({
   providedIn: 'root',

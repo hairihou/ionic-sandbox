@@ -5,7 +5,7 @@ import { finalize } from 'rxjs';
 
 import { InfiniteScrollCustomEvent, ModalController, Platform, RefresherCustomEvent } from '@ionic/angular';
 
-import { SampleListItem } from '../interfaces/sample-data.interface';
+import { SampleListItem } from '../core/interfaces/sample-data.interface';
 import { TabsService } from '../tabs/services/tabs.service';
 import { VirtualContentPage } from './modals/virtual-content/virtual-content.page';
 

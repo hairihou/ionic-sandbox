@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -11,5 +10,5 @@ export class ExploreContainerComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

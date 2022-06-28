@@ -28,7 +28,7 @@
     "@ionic/angular": "^6.1.11",
     "@ngrx/store": "^14.0.0",
     "rxjs": "~7.5.5",
-    "swiper": "^8.2.4",
+    "swiper": "^8.2.5",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

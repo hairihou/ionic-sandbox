@@ -4,7 +4,7 @@ import { finalize } from 'rxjs';
 
 import { InfiniteScrollCustomEvent, RefresherCustomEvent } from '@ionic/angular';
 
-import { SampleWiki } from '../interfaces/sample-data.interface';
+import { SampleWiki } from '../core/interfaces/sample-data.interface';
 import { TabsService } from '../tabs/services/tabs.service';
 
 @Component({
