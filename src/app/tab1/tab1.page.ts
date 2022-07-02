@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { DatetimeCustomEvent, IonContent, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
+import { IonContent, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 
 import { TabsService } from '../tabs/services/tabs.service';
 
@@ -40,13 +40,5 @@ export class Tab1Page implements OnInit, ViewWillEnter, ViewWillLeave {
 
   ionViewWillLeave(): void {
     this.tab$.unsubscribe();
-  }
-
-  changeDate(event: DatetimeCustomEvent): void {
-    console.log(event.detail.value);
-    console.log(parseISO(event.detail.value));
-    console.log(parseISO(event.detail.value).toISOString());
-    console.log(new Date(event.detail.value));
-    console.log(new Date(event.detail.value).toISOString());
   }
 }

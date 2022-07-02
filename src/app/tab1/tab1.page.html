@@ -22,7 +22,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-datetime [min]="minDate" [max]="maxDate" [(ngModel)]="date" (ionChange)="changeDate($event)"></ion-datetime>
+  <ion-datetime [min]="minDate" [max]="maxDate" [(ngModel)]="date"></ion-datetime>
   <ion-item>
     <ion-label>{{ date }}</ion-label>
   </ion-item>
