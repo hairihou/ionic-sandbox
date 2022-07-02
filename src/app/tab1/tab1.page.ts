@@ -6,6 +6,7 @@ import { IonContent, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 
 import { format } from 'date-fns';
 
+import { HttpService } from '../core/services/http.service';
 import { TabsService } from '../tabs/services/tabs.service';
 
 @Component({
@@ -22,11 +23,9 @@ export class Tab1Page implements OnInit, ViewWillEnter, ViewWillLeave {
   readonly title = 'Tab1';
   tab$ = new Subscription();
 
-  constructor(private tabsService: TabsService) {}
+  constructor(private httpService: HttpService, private tabsService: TabsService) {}
 
-  ngOnInit(): void {
-    console.log(Date.now());
-  }
+  ngOnInit(): void {}
 
   ionViewWillEnter(): void {
     this.tab$ = this.tabsService.tabChange$.subscribe({
